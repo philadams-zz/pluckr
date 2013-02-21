@@ -26,7 +26,11 @@ Skip header row(s):
 
 Read (and write) various delimiters:
 
-    pluckr -d, --out-delimiter=| < with-commas.csv > with-pipes.csv
+    pluckr -d, --out-delimiter=\| < with-commas.csv > with-pipes.csv
+
+Note that passing tabs as arguments can be awkward; in a pinch, use:
+
+    pluckr -d $'\t'
 
 help
 ----
@@ -53,5 +57,6 @@ Via `--help`:
 future
 ------
 
+- allow -f to take columns by name
 - add out delimiter support
 - add out quotechar support
