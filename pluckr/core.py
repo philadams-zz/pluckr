@@ -11,11 +11,37 @@ See README.txt for details.
 """
 
 import csv
+import sys
+
+
+def pluck(rows, fields, invert=False):
+    for row in rows:
+        yield [row[i] for i in fields if len(row) > i]
+
+
+def main(args):
+
+    # parse csv data
+    rows = csv.reader(args.infile,
+            delimiter=args.delimiter, quotechar=args.quotechar)
+
+    # skip n rows
+    for i in range(args.skip):
+        rows.next()
+
+    # prep fields
+    if not args.fields:
+        fields = ''
+    fields = set([int(f) for f in args.fields.replace(' ', '').split(',')])
+
+    # push to stdout
+    out = csv.writer(sys.stdout)
+    for row in pluck(rows, fields):
+        out.writerow(row)
 
 
 def cli():
     import argparse
-    import sys
 
     # populate and parse command line options
     desc = 'Grab columns from csv input.'
@@ -35,24 +61,4 @@ def cli():
             type=int, help='number of rows to skip')
     args = parser.parse_args()
 
-    # parse csv data
-    rows = csv.reader(args.infile,
-            delimiter=args.delimiter, quotechar=args.quotechar)
-
-    # skip n rows
-    for i in range(args.skip):
-        rows.next()
-
-    # prep fields
-    if not args.fields:
-        fields = ''
-    fields = set([int(f) for f in args.fields.replace(' ', '').split(',')])
-
-    # grab requested fields
-    outrows = []
-    for row in rows:
-        outrows.append([row[i] for i in fields if len(row) > i])
-
-    # push to stdout
-    out = csv.writer(sys.stdout)
-    out.writerows(outrows)
+    main(args)
