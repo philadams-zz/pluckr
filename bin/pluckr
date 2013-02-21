@@ -9,4 +9,5 @@ except ImportError:
     sys.path.insert(0, os.path.abspath('..'))
     import pluckr
 
-pluckr.cli()
+if __name__ == '__main__':
+    pluckr.cli()

@@ -43,7 +43,16 @@ def cli():
     for i in range(args.skip):
         rows.next()
 
+    # prep fields
+    if not args.fields:
+        fields = ''
+    fields = set([int(f) for f in args.fields.replace(' ', '').split(',')])
 
+    # grab requested fields
+    outrows = []
+    for row in rows:
+        outrows.append([row[i] for i in fields if len(row) > i])
 
+    # push to stdout
     out = csv.writer(sys.stdout)
-    out.writerows(rows)
+    out.writerows(outrows)
