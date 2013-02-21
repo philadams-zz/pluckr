@@ -9,4 +9,4 @@ except ImportError:
     sys.path.insert(0, os.path.abspath('..'))
     import pluckr
 
-print('pluckr: %s' % pluckr.hello_world())
+pluckr.cli()

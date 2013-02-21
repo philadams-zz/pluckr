@@ -1,1 +1,1 @@
-from .core import hello_world
+from .core import cli
