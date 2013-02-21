@@ -10,6 +10,8 @@ escaping.
 See README.txt for details.
 """
 
+import csv
+
 
 def do_plucking(filenames):
     pass
@@ -27,13 +29,21 @@ def cli():
     desc += '\nhttp://github.com/philadams/pluckr'
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('infile', nargs='?', default=sys.stdin,
-            type=argparse.FileType('r'), help='input file (.csv)')
+            type=argparse.FileType('rU'), help='input file (.csv)')
     parser.add_argument('-f', '--fields', dest='fields',
             help='the columns to grab')
     parser.add_argument('-i', '--inverse', dest='inverse',
             help='invert the column selection: drop them instead')
     parser.add_argument('-d', '--delimiter', default=',', dest='delimiter',
             help='field delimiter when reading infile')
+    parser.add_argument('-q', '--quotechar', default='"', dest='quotechar',
+            help='field quotechar when reading infile')
     parser.add_argument('-s', '--skip', default=0, dest='skip',
             help='number of rows to skip')
     args = parser.parse_args()
+
+    rows = csv.reader(args.infile,
+            delimiter=args.delimiter, quotechar=args.quotechar)
+
+    out = csv.writer(sys.stdout)
+    out.writerows(rows)
