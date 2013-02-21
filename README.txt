@@ -37,7 +37,9 @@ help
 
 Via `--help`:
 
-    usage: pluckr [-h] [-f FIELDS] [-i INVERSE] [-d DELIMITER] [-s SKIP] [infile]
+    usage: pluckr [-h] [-f FIELDS] [-i INVERSE] [-d DELIMITER] [-q QUOTECHAR]
+                  [-s SKIP]
+                  [infile]
 
     Grab columns from csv input. http://github.com/philadams/pluckr
 
@@ -47,16 +49,20 @@ Via `--help`:
     optional arguments:
       -h, --help            show this help message and exit
       -f FIELDS, --fields FIELDS
-                            the columns to grab
+                            the columns to grab (first column is 1)
       -i INVERSE, --inverse INVERSE
                             invert the column selection: drop them instead
       -d DELIMITER, --delimiter DELIMITER
                             field delimiter when reading infile
+      -q QUOTECHAR, --quotechar QUOTECHAR
+                            field quotechar when reading infile
       -s SKIP, --skip SKIP  number of rows to skip
 
 future
 ------
 
-- allow -f to take columns by name
+- implement -i
+- implement --out-*
+- allow -f to take columns by name?
 - add out delimiter support
 - add out quotechar support
