@@ -20,6 +20,10 @@ Or straight from a file:
 
     pluckr -f 2,3 sample1.csv
 
+You can also use Python's negative indices... grab the first and last cols:
+
+    pluckr -f 1,-1 sample1.csv
+
 Skip header row(s):
 
     cat sample1.csv | pluckr -s1
@@ -49,7 +53,7 @@ Via `--help`:
     optional arguments:
       -h, --help            show this help message and exit
       -f FIELDS, --fields FIELDS
-                            the columns to grab (first column is 1)
+                            the columns to grab (first column is 0)
       -i INVERSE, --inverse INVERSE
                             invert the column selection: drop them instead
       -d DELIMITER, --delimiter DELIMITER
@@ -61,8 +65,9 @@ Via `--help`:
 future
 ------
 
+- not choke when -f not passed...
 - implement -i
-- implement --out-*
+- implement --out-**
 - allow -f to take columns by name?
 - add out delimiter support
 - add out quotechar support
