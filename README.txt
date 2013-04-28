@@ -24,6 +24,8 @@ You can also use Python's negative indices... grab the first and last cols:
 
     pluckr -f 1,-1 sample1.csv
 
+Fields that don't exist (e.g. `-f11111`) will be ignored.
+
 Skip header row(s):
 
     cat sample1.csv | pluckr -s1
@@ -53,7 +55,7 @@ Via `--help`:
     optional arguments:
       -h, --help            show this help message and exit
       -f FIELDS, --fields FIELDS
-                            the columns to grab (first column is 0)
+                            the columns to grab (first column is 1)
       -i INVERSE, --inverse INVERSE
                             invert the column selection: drop them instead
       -d DELIMITER, --delimiter DELIMITER
