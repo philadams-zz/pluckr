@@ -21,8 +21,6 @@ def pluck(rows, fields, invert=False):
 
 def main(args):
 
-    print args
-
     # parse csv data
     rows = csv.reader(args.infile,
             delimiter=args.delimiter, quotechar=args.quotechar)

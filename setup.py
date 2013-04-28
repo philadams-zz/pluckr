@@ -6,7 +6,7 @@ with open('README.txt') as f:
 
 setup(
     name='pluckr',
-    version='0.0.2',
+    version='0.0.3',
     author='Phil Adams',
     author_email='phil@philadams.net',
     url='https://github.com/philadams/pluckr',
