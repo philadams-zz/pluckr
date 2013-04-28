@@ -21,6 +21,8 @@ def pluck(rows, fields, invert=False):
 
 def main(args):
 
+    print args
+
     # parse csv data
     rows = csv.reader(args.infile,
             delimiter=args.delimiter, quotechar=args.quotechar)
@@ -30,14 +32,18 @@ def main(args):
         rows.next()
 
     # prep fields
-    if not args.fields:
-        fields = ''
-    fields = set([int(f) for f in args.fields.replace(' ', '').split(',')])
+    if args.fields:
+        fields = set(int(f)-1 for f in args.fields.replace(' ', '').split(','))
+    else:
+        fields = None
 
     # push to stdout
     out = csv.writer(sys.stdout)
-    for row in pluck(rows, fields):
-        out.writerow(row)
+    if fields is None:
+        out.writerows(rows)
+    else:
+        for row in pluck(rows, fields):
+            out.writerow(row)
 
 
 def cli():
