@@ -67,6 +67,7 @@ Via `--help`:
 future
 ------
 
+- tests!!!
 - not choke when -f not passed...
 - implement -i
 - implement --out-**
