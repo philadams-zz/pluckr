@@ -1,6 +1,6 @@
-
 from distutils.core import setup
 
+version = '0.0.3'
 description = 'Pluck columns from CSV files in the command line.'
 description += ' Like cut or awk, but doesn\'t choke on delimiter escaping.'
 with open('README.txt') as f:
@@ -8,7 +8,7 @@ with open('README.txt') as f:
 
 setup(
     name='pluckr',
-    version='0.0.3',
+    version=version,
     author='Phil Adams',
     author_email='phil@philadams.net',
     url='https://github.com/philadams/pluckr',
