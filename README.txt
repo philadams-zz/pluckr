@@ -12,21 +12,21 @@ install
 usage
 -----
 
-Grab columns 2 and 3 from stdin:
+Grab columns 2 and 3 from stdin (`-f` is zero-indexed):
 
-    pluckr -f 2,3 < sample1.csv
+    pluckr -f 1,2 < sample1.csv
 
 Or straight from a file:
 
-    pluckr -f 2,3 sample1.csv
+    pluckr -f 2,1 sample1.csv
 
-Order is retained:
+Your requested order is retained:
 
-    pluckr -f 2,3 sample1.csv != pluckr -f 3,3 sample1.csv
+    pluckr -f 1,2 sample1.csv != pluckr -f 2,1 sample1.csv
 
 You can also use Python's negative indices... grab the first and last cols:
 
-    pluckr -f 1,-1 sample1.csv
+    pluckr -f 0,-1 sample1.csv
 
 Fields that don't exist (e.g. `-f11111`) will be ignored.
 
@@ -59,7 +59,7 @@ Via `--help`:
     optional arguments:
       -h, --help            show this help message and exit
       -f FIELDS, --fields FIELDS
-                            the columns to grab (first column is 1)
+                            the columns to grab (first column is 0)
       -i INVERSE, --inverse INVERSE
                             invert the column selection: drop them instead
       -d DELIMITER, --delimiter DELIMITER
@@ -73,7 +73,6 @@ future
 
 - tests!!!
 - not choke when -f not passed...
-- add --version!
 - implement -i
 - implement --out-**
 - allow -f to take columns by name?
