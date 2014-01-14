@@ -31,8 +31,7 @@ def main(args):
 
     # prep fields
     if args.fields:
-        fields = set(int(f) - 1
-                     for f in args.fields.replace(' ', '').split(','))
+        fields = [int(f) - 1 for f in args.fields.replace(' ', '').split(',')]
     else:
         fields = None
 

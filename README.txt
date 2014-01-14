@@ -2,7 +2,7 @@ pluckr
 ======
 
 Pluck columns from csv files in the commandline. Like cut or awk, but without
-choke on delimiter escaping.
+choking on delimiter escaping.
 
 install
 -------
@@ -19,6 +19,10 @@ Grab columns 2 and 3 from stdin:
 Or straight from a file:
 
     pluckr -f 2,3 sample1.csv
+
+Order is retained:
+
+    pluckr -f 2,3 sample1.csv != pluckr -f 3,3 sample1.csv
 
 You can also use Python's negative indices... grab the first and last cols:
 
@@ -69,6 +73,7 @@ future
 
 - tests!!!
 - not choke when -f not passed...
+- add --version!
 - implement -i
 - implement --out-**
 - allow -f to take columns by name?
