@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-version = '0.0.4'
+version = '0.0.5'
 description = 'Pluck columns from CSV files in the command line.'
 description += ' Like cut or awk, but doesn\'t choke on delimiter escaping.'
 with open('README.txt') as f:

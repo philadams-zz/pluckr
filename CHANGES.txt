@@ -2,3 +2,4 @@ v0.0.1, 2013-01-07 -- Initial release.
 v0.0.2, 2013-02-21 -- Basic functionality.
 v0.0.3, 2013-02-21 -- Working without -f; confirming -f1 is first column.
 v0.0.4, 2014-01-14 -- Retain requested column order with -f; make -f zero-indexed.
+v0.0.5, 2014-01-17 -- Drop selected columns with -i rather than retaining them.
