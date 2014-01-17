@@ -14,9 +14,19 @@ import csv
 import sys
 
 
-def pluck(rows, fields, invert=False):
+def pluck(rows, fields, inverse=False):
+    """
+    rows: an iterable of iterables
+    yield each row in `rows`, retaining only those indices of row in `fields`.
+    if inverse=True, retain only those indices NOT in `fields`
+    """
+    retain = None
     for row in rows:
-        yield [row[i] for i in fields if len(row) > i]
+        if not inverse:
+            retain = retain or fields
+        else:
+            retain = retain or [i for i in range(len(row)) if i not in fields]
+        yield [row[i] for i in retain if len(row) > i]
 
 
 def main(args):
@@ -40,7 +50,7 @@ def main(args):
     if fields is None:
         out.writerows(rows)
     else:
-        for row in pluck(rows, fields):
+        for row in pluck(rows, fields, inverse=args.inverse):
             out.writerow(row)
 
 
@@ -54,9 +64,9 @@ def cli():
     parser.add_argument('infile', nargs='?', default=sys.stdin,
                         type=argparse.FileType('rU'), help='input file (.csv)')
     parser.add_argument('-f', '--fields', dest='fields',
-                        help='the columns to grab (first column is 1)')
-    parser.add_argument('-i', '--inverse', dest='inverse',
-                        help='invert the column selection: drop them instead')
+                        help='ordered list of columns to retain; zero-indexed')
+    parser.add_argument('-i', '--inverse', dest='inverse', action='store_true',
+                        help='invert column retention: drop those in -f')
     parser.add_argument('-d', '--delimiter', default=',', dest='delimiter',
                         help='field delimiter when reading infile')
     parser.add_argument('-q', '--quotechar', default='"', dest='quotechar',

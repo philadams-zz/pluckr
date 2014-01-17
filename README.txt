@@ -34,6 +34,10 @@ Skip header row(s):
 
     cat sample1.csv | pluckr -s1
 
+Grab all but the 2nd column (drop columns instead of selecting them):
+
+    pluckr -f 1 -i < sample1.csv
+
 Read (and write) various delimiters:
 
     pluckr -d, --out-delimiter=\| < with-commas.csv > with-pipes.csv
@@ -47,9 +51,8 @@ help
 
 Via `--help`:
 
-    usage: pluckr [-h] [-f FIELDS] [-i INVERSE] [-d DELIMITER] [-q QUOTECHAR]
-                  [-s SKIP]
-                  [infile]
+  usage: pluckr [-h] [-f FIELDS] [-i] [-d DELIMITER] [-q QUOTECHAR] [-s SKIP]
+                [infile]
 
     Grab columns from csv input. http://github.com/philadams/pluckr
 
@@ -59,9 +62,8 @@ Via `--help`:
     optional arguments:
       -h, --help            show this help message and exit
       -f FIELDS, --fields FIELDS
-                            the columns to grab (first column is 0)
-      -i INVERSE, --inverse INVERSE
-                            invert the column selection: drop them instead
+                            ordered list of columns to retain; zero-indexed
+      -i, --inverse         invert column retention: drop those in -f
       -d DELIMITER, --delimiter DELIMITER
                             field delimiter when reading infile
       -q QUOTECHAR, --quotechar QUOTECHAR
@@ -71,10 +73,8 @@ Via `--help`:
 future
 ------
 
-- tests!!!
-- not choke when -f not passed...
-- implement -i
-- implement --out-**
-- allow -f to take columns by name?
+- allow -f to take columns by name when there's a header row?
+- implement --out-** for output delimiters etc.
 - add out delimiter support
 - add out quotechar support
+- tests!!!
