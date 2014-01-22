@@ -1,6 +1,6 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
-version = '0.0.5'
+version = '0.0.6'
 description = 'Pluck columns from CSV files in the command line.'
 description += ' Like cut or awk, but doesn\'t choke on delimiter escaping.'
 with open('README.txt') as f:
@@ -15,6 +15,6 @@ setup(
     license='LICENSE.txt',
     description=description,
     long_description=readme,
-    packages=['pluckr'],
+    packages=find_packages(exclude=('tests', 'docs')),
     scripts=['bin/pluckr'],
 )
