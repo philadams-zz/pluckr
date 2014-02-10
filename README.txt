@@ -28,6 +28,10 @@ You can also use Python's negative indices... grab the first and last cols:
 
     pluckr -f 0,-1 sample1.csv
 
+Can't be sure which columns exist or what their indices are?
+
+    pluckr --names sample1.csv
+
 Fields that don't exist (e.g. `-f11111`) will be ignored.
 
 Preprended line numbers can be helpful:
@@ -56,7 +60,7 @@ help
 Via `--help`:
 
     usage: pluckr [-h] [-f FIELDS] [-i] [-d DELIMITER] [-q QUOTECHAR] [-s SKIP]
-                  [-l]
+                  [-l] [-n]
                   [infile]
 
     Grab columns from csv input. http://github.com/philadams/pluckr
@@ -75,12 +79,12 @@ Via `--help`:
                             field quotechar when reading infile
       -s SKIP, --skip SKIP  number of rows to skip
       -l, --line-numbers    prepend line numbers to output
+      -n, --names           print column names; assumes one header row
 
 future
 ------
 
 - allow -f to take columns by name when there's a header row?
-- implement -n,--names that displays all the fields
 - implement --out-x for output delimiters etc.
 - json output? or, contribute a cli to kennethreitz/tablib
 - add out delimiter support

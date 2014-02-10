@@ -40,6 +40,13 @@ def main(args):
     rows = csv.reader(args.infile,
                       delimiter=args.delimiter, quotechar=args.quotechar)
 
+    # if --names just display col names and exit
+    if args.col_names:
+        names = rows.next()
+        for idx, name in enumerate(names):
+            sys.stdout.write('%d. %s\n' % (idx, name))
+        exit(0)
+
     # skip n rows
     for i in range(args.skip):
         rows.next()
@@ -83,6 +90,8 @@ def cli():
     parser.add_argument('-l', '--line-numbers', dest='line_numbers',
                         action='store_true',
                         help='prepend line numbers to output')
+    parser.add_argument('-n', '--names', dest='col_names', action='store_true',
+                        help='print column names; assumes one header row')
     args = parser.parse_args()
 
     main(args)
