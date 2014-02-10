@@ -81,6 +81,12 @@ Via `--help`:
       -l, --line-numbers    prepend line numbers to output
       -n, --names           print column names; assumes one header row
 
+tests
+-----
+
+This project uses [roundup](https://github.com/bmizerany/roundup) for testing.
+Run tests with `make test`.
+
 future
 ------
 
@@ -89,4 +95,3 @@ future
 - json output? or, contribute a cli to kennethreitz/tablib
 - add out delimiter support
 - add out quotechar support
-- tests!!!
