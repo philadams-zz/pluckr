@@ -18,15 +18,20 @@ def pluck(rows, fields, inverse=False):
     """
     rows: an iterable of iterables
     yield each row in `rows`, retaining only those indices of row in `fields`.
-    if inverse=True, retain only those indices NOT in `fields`
+    if inverse=True, retain only those indices NOT in `fields`.
+    if line_numbers=True, prepend a column 'line' starting at line=0.
     """
     retain = None
-    for row in rows:
+    for idx, row in enumerate(rows):
+
+        # retain the appropriate columns
         if not inverse:
             retain = retain or fields
         else:
             retain = retain or [i for i in range(len(row)) if i not in fields]
-        yield [row[i] for i in retain if len(row) > i]
+        newrow = [row[i] for i in retain if len(row) > i]
+
+        yield newrow
 
 
 def main(args):
@@ -47,11 +52,13 @@ def main(args):
 
     # push to stdout
     out = csv.writer(sys.stdout)
+    iter = enumerate(pluck(rows, fields, inverse=args.inverse))
     if fields is None:
-        out.writerows(rows)
-    else:
-        for row in pluck(rows, fields, inverse=args.inverse):
-            out.writerow(row)
+        iter = enumerate(rows)
+    for idx, row in iter:
+        if args.line_numbers:
+            row.insert(0, idx)
+        out.writerow(row)
 
 
 def cli():
@@ -73,6 +80,9 @@ def cli():
                         help='field quotechar when reading infile')
     parser.add_argument('-s', '--skip', default=0, dest='skip',
                         type=int, help='number of rows to skip')
+    parser.add_argument('-l', '--line-numbers', dest='line_numbers',
+                        action='store_true',
+                        help='prepend line numbers to output')
     args = parser.parse_args()
 
     main(args)
