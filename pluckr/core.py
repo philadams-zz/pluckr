@@ -58,7 +58,7 @@ def main(args):
         fields = None
 
     # push to stdout
-    out = csv.writer(sys.stdout)
+    out = csv.writer(sys.stdout, lineterminator='\n')
     iter = enumerate(pluck(rows, fields, inverse=args.inverse))
     if fields is None:
         iter = enumerate(rows)
