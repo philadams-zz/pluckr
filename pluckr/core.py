@@ -53,7 +53,12 @@ def main(args):
 
     # prep fields
     if args.fields:
-        fields = [int(f) for f in args.fields.replace(' ', '').split(',')]
+        fields = []
+        for f in args.fields.replace(' ', '').split(','):
+            f = int(f)
+            if f > 0:
+                f -= 1
+            fields.append(f)
     else:
         fields = None
 
@@ -77,8 +82,8 @@ def cli():
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('infile', nargs='?', default=sys.stdin,
                         type=argparse.FileType('rU'), help='input file (.csv)')
-    parser.add_argument('-f', '--fields', dest='fields',
-                        help='ordered list of columns to retain; zero-indexed')
+    parser.add_argument('-f', dest='fields',
+                        help='ordered list of columns to retain; one-indexed')
     parser.add_argument('-i', '--inverse', dest='inverse', action='store_true',
                         help='invert column retention: drop those in -f')
     parser.add_argument('-d', '--delimiter', default=',', dest='delimiter',

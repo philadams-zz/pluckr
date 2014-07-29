@@ -12,9 +12,9 @@ install
 usage
 -----
 
-Grab columns 2 and 3 from stdin (`-f` is zero-indexed):
+Grab columns 2 and 3 from stdin (`-f` is one-indexed):
 
-    pluckr -f 1,2 < sample1.csv
+    pluckr -f 2,3 < sample1.csv
 
 Or straight from a file:
 
@@ -26,7 +26,7 @@ Your requested order is retained:
 
 You can also use Python's negative indices... grab the first and last cols:
 
-    pluckr -f 0,-1 sample1.csv
+    pluckr -f 1,-1 sample1.csv
 
 Can't be sure which columns exist or what their indices are?
 
@@ -44,7 +44,7 @@ Skip header row(s):
 
 Grab all but the 2nd column (drop columns instead of selecting them):
 
-    pluckr -f 1 -i < sample1.csv
+    pluckr -f 1 -i < sample2.csv
 
 Read (and write) various delimiters:
 
@@ -70,8 +70,7 @@ Via `--help`:
 
     optional arguments:
       -h, --help            show this help message and exit
-      -f FIELDS, --fields FIELDS
-                            ordered list of columns to retain; zero-indexed
+      -f FIELDS             ordered list of columns to retain; one-indexed
       -i, --inverse         invert column retention: drop those in -f
       -d DELIMITER, --delimiter DELIMITER
                             field delimiter when reading infile
