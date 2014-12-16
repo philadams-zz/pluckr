@@ -24,9 +24,13 @@ Your requested order is retained:
 
     pluckr -f 1,2 sample1.csv != pluckr -f 2,1 sample1.csv
 
-You can also use Python's negative indices... grab the first and last cols:
+You can use Python's negative indices... grab the first and last cols:
 
     pluckr -f 1,-1 sample1.csv
+
+And you can mix in ranges for column selection:
+
+    pluckr -f 2,4-6,9 sample1.csv
 
 Can't be sure which columns exist or what their indices are?
 

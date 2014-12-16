@@ -10,8 +10,9 @@ escaping.
 See README.txt for details.
 """
 
-import csv
 import sys
+import re
+import csv
 
 
 def pluck(rows, fields, inverse=False):
@@ -32,6 +33,15 @@ def pluck(rows, fields, inverse=False):
         newrow = [row[i] for i in retain if len(row) > i]
 
         yield newrow
+
+
+def type_and_index_field(field):
+    """coerce field to an int, and, as the UI is one-indexed, decrememnt
+    field values >= 0 by 1."""
+    field = int(field)
+    if field >= 0:
+        field -= 1
+    return field
 
 
 def main(args):
@@ -55,10 +65,12 @@ def main(args):
     if args.fields:
         fields = []
         for f in args.fields.replace(' ', '').split(','):
-            f = int(f)
-            if f > 0:
-                f -= 1
-            fields.append(f)
+            if re.findall(r'\d+-\d+', f):
+                start, stop = map(int, f.split('-'))
+                for g in range(start, stop + 1):
+                    fields.append(type_and_index_field(g))
+            else:
+                fields.append(type_and_index_field(f))
     else:
         fields = None
 

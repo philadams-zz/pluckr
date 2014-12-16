@@ -43,6 +43,11 @@ it_respects_col_order_requests() {
   test "$out" = "preferred,first,last"
 }
 
+it_handles_column_ranges() {
+  out=$($pluckr -f2,2-3,1 $fixture | head -n1)
+  test "$out" = "last,last,preferred,first"
+}
+
 it_understands_negative_indices() {
   out=$($pluckr -f-1,1 $fixture | head -n1)
   test "$out" = "preferred,first"
