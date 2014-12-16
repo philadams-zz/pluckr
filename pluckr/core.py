@@ -20,7 +20,6 @@ def pluck(rows, fields, inverse=False):
     rows: an iterable of iterables
     yield each row in `rows`, retaining only those indices of row in `fields`.
     if inverse=True, retain only those indices NOT in `fields`.
-    if line_numbers=True, prepend a column 'line' starting at line=0.
     """
     retain = None
     for idx, row in enumerate(rows):
@@ -29,6 +28,7 @@ def pluck(rows, fields, inverse=False):
         if not inverse:
             retain = retain or fields
         else:
+            fields = [f if f >= 0 else len(row) + f for f in fields]
             retain = retain or [i for i in range(len(row)) if i not in fields]
         newrow = [row[i] for i in retain if len(row) > i]
 
