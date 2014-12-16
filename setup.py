@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.0.7'
+version = '0.0.8'
 description = 'Pluck columns from CSV files in the command line.'
 description += ' Like cut or awk, but doesn\'t choke on delimiter escaping.'
 with open('README.txt') as f:

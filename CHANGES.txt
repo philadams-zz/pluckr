@@ -5,3 +5,4 @@ v0.0.4, 2014-01-14 -- Retain requested column order with -f; make -f zero-indexe
 v0.0.5, 2014-01-17 -- Drop selected columns with -i rather than retaining them.
 v0.0.6, 2014-01-22 -- Now using setuptools v2.1.
 v0.0.7, 2014-01-22 -- Including --names and --line-numbers. And tests.
+v0.0.8, 2014-12-15 -- Support ranges in column selection; bug squashes.
