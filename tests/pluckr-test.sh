@@ -55,7 +55,7 @@ it_understands_negative_indices() {
 
 it_shows_column_names() {
   $pluckr $fixture --names > $tmp
-  echo "0. first\n1. last\n2. preferred" > $tmp2
+  echo "1. first\n2. last\n3. preferred" > $tmp2
   diff $tmp $tmp2
 }
 

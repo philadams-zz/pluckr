@@ -54,7 +54,7 @@ def main(args):
     if args.col_names:
         names = rows.next()
         for idx, name in enumerate(names):
-            sys.stdout.write('%d. %s\n' % (idx, name))
+            sys.stdout.write('%d. %s\n' % (idx + 1, name))
         exit(0)
 
     # skip n rows
